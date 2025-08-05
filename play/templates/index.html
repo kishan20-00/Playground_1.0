@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Playground - LLM Solutions & AI TaaS Platform</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional LLM playground and AI Testing-as-a-Service platform. Build, test, and deploy AI solutions with our comprehensive suite of tools and services.">
+    <meta name="keywords" content="LLM, AI, Machine Learning, Testing as a Service, AI Platform, Language Models, AI Development">
+    <meta name="author" content="AI Playground">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Playground - LLM Solutions & AI TaaS Platform">
+    <meta property="og:description" content="Professional LLM playground and AI Testing-as-a-Service platform for modern AI development.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="fas fa-brain me-2"></i>AI Playground
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#playground">Playground</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-2" href="#demo">Request Demo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold mb-4 hero-title">
+                            Next-Generation <span class="text-primary">LLM Playground</span> & AI Testing Platform
+                        </h1>
+                        <p class="lead mb-4">
+                            Accelerate your AI development with our comprehensive suite of tools. Test, validate, and deploy language models with confidence using our professional-grade platform.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#playground" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-rocket me-2"></i>Try Playground
+                            </a>
+                            <a href="#demo" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-calendar me-2"></i>Book Demo
+                            </a>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="row mt-5">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3 class="fw-bold text-primary">50+</h3>
+                                    <p class="small text-muted">LLM Models</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3 class="fw-bold text-primary">99.9%</h3>
+                                    <p class="small text-muted">Uptime</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3 class="fw-bold text-primary">1000+</h3>
+                                    <p class="small text-muted">Developers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-animation">
+                        <div class="floating-card">
+                            <div class="card bg-dark border-primary">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-terminal text-primary me-2"></i>
+                                        <span class="fw-medium">AI Terminal</span>
+                                    </div>
+                                    <div class="terminal-content">
+                                        <p class="mb-2 font-monospace small">
+                                            <span class="text-success">$</span> ai-playground deploy --model gpt-4
+                                        </p>
+                                        <p class="mb-2 font-monospace small text-muted">
+                                            ✓ Model validated successfully
+                                        </p>
+                                        <p class="mb-0 font-monospace small text-muted">
+                                            ✓ Deployment complete in 2.3s
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LLM Playground Section -->
+    <section id="playground" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Interactive LLM Playground</h2>
+                    <p class="lead">
+                        Experiment with cutting-edge language models in a professional environment. 
+                        Test prompts, compare outputs, and fine-tune parameters with ease.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="feature-card card h-100 bg-dark border-0">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-code text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Multi-Model Testing</h5>
+                            <p class="card-text">
+                                Test and compare responses from GPT-4, Claude, Llama, and 50+ other models 
+                                side by side in real-time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="feature-card card h-100 bg-dark border-0">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-sliders-h text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Parameter Control</h5>
+                            <p class="card-text">
+                                Fine-tune temperature, top-p, frequency penalty, and other parameters 
+                                to achieve perfect model behavior.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="feature-card card h-100 bg-dark border-0">
+                        <div class="card-body">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-chart-line text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Performance Analytics</h5>
+                            <p class="card-text">
+                                Monitor response times, token usage, costs, and quality metrics 
+                                across all your experiments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Playground Demo -->
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="playground-demo card bg-dark border-primary">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-play-circle text-primary me-2"></i>
+                                <span class="fw-medium">Live Playground Preview</span>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Prompt Input</label>
+                                    <div class="demo-input p-3 bg-secondary rounded">
+                                        <code>Explain quantum computing in simple terms...</code>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Model Response</label>
+                                    <div class="demo-output p-3 bg-info bg-opacity-10 rounded">
+                                        <p class="mb-0 small">
+                                            Quantum computing uses quantum mechanical phenomena to process information 
+                                            in ways that classical computers cannot...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI TaaS Services Section -->
+    <section id="services" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">AI Testing-as-a-Service</h2>
+                    <p class="lead">
+                        Comprehensive AI testing solutions for enterprises. From model validation 
+                        to performance monitoring, we've got your AI pipeline covered.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="service-card card h-100 bg-dark border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <div class="service-icon me-3">
+                                    <i class="fas fa-shield-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title">Model Validation & Testing</h5>
+                                    <p class="card-text">
+                                        Comprehensive testing suites for AI models including bias detection, 
+                                        performance benchmarking, and safety validation.
+                                    </p>
+                                    <ul class="list-unstyled small text-muted">
+                                        <li><i class="fas fa-check text-success me-2"></i>Automated test generation</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Bias and fairness testing</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Performance benchmarking</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="service-card card h-100 bg-dark border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <div class="service-icon me-3">
+                                    <i class="fas fa-tachometer-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title">Performance Monitoring</h5>
+                                    <p class="card-text">
+                                        Real-time monitoring and alerting for your AI systems with detailed 
+                                        analytics and performance insights.
+                                    </p>
+                                    <ul class="list-unstyled small text-muted">
+                                        <li><i class="fas fa-check text-success me-2"></i>Real-time monitoring</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Custom alerting rules</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Performance analytics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="service-card card h-100 bg-dark border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <div class="service-icon me-3">
+                                    <i class="fas fa-cogs text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title">CI/CD Integration</h5>
+                                    <p class="card-text">
+                                        Seamlessly integrate AI testing into your development pipeline with 
+                                        our comprehensive CI/CD tools and APIs.
+                                    </p>
+                                    <ul class="list-unstyled small text-muted">
+                                        <li><i class="fas fa-check text-success me-2"></i>GitHub Actions integration</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>REST API access</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Custom webhooks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="service-card card h-100 bg-dark border-0">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start">
+                                <div class="service-icon me-3">
+                                    <i class="fas fa-users text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title">Expert Consulting</h5>
+                                    <p class="card-text">
+                                        Get guidance from our team of AI experts to optimize your testing 
+                                        strategy and improve model performance.
+                                    </p>
+                                    <ul class="list-unstyled small text-muted">
+                                        <li><i class="fas fa-check text-success me-2"></i>1-on-1 consultations</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Custom testing strategies</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>Best practices guidance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">About AI Playground</h2>
+                    <p class="lead">
+                        We're on a mission to democratize AI development by providing world-class 
+                        testing and development tools for the next generation of AI applications.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h3 class="h4 fw-bold mb-4">Empowering AI Innovation</h3>
+                        <p class="mb-4">
+                            Founded by AI researchers and industry veterans, AI Playground bridges the gap 
+                            between cutting-edge research and practical AI deployment. Our platform has 
+                            been trusted by Fortune 500 companies and innovative startups alike.
+                        </p>
+                        
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="about-stat">
+                                    <h4 class="text-primary fw-bold">2021</h4>
+                                    <p class="small text-muted mb-0">Founded</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat">
+                                    <h4 class="text-primary fw-bold">50M+</h4>
+                                    <p class="small text-muted mb-0">API Calls</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat">
+                                    <h4 class="text-primary fw-bold">100+</h4>
+                                    <p class="small text-muted mb-0">Enterprise Clients</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-stat">
+                                    <h4 class="text-primary fw-bold">24/7</h4>
+                                    <p class="small text-muted mb-0">Support</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="about-features">
+                        <div class="feature-item d-flex align-items-start mb-4">
+                            <div class="feature-icon-sm me-3">
+                                <i class="fas fa-lightbulb text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Innovation First</h6>
+                                <p class="small text-muted mb-0">
+                                    We stay at the forefront of AI research to bring you the latest tools and techniques.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item d-flex align-items-start mb-4">
+                            <div class="feature-icon-sm me-3">
+                                <i class="fas fa-lock text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Enterprise Security</h6>
+                                <p class="small text-muted mb-0">
+                                    SOC 2 compliant with enterprise-grade security and privacy protection.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item d-flex align-items-start">
+                            <div class="feature-icon-sm me-3">
+                                <i class="fas fa-rocket text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold">Scale Ready</h6>
+                                <p class="small text-muted mb-0">
+                                    Built to handle everything from prototype to production-scale AI workloads.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">What Our Clients Say</h2>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card card bg-dark border-0 h-100">
+                        <div class="card-body">
+                            <div class="stars mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text mb-4">
+                                "AI Playground transformed our AI testing workflow. We reduced model validation 
+                                time by 70% and caught critical issues before production."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-placeholder me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Sarah Chen</div>
+                                    <small class="text-muted">Head of AI, TechCorp</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="testimonial-card card bg-dark border-0 h-100">
+                        <div class="card-body">
+                            <div class="stars mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text mb-4">
+                                "The playground environment is incredibly intuitive. Our team was able to 
+                                start experimenting with new models within minutes of signing up."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-placeholder me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Marcus Rodriguez</div>
+                                    <small class="text-muted">ML Engineer, StartupAI</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="testimonial-card card bg-dark border-0 h-100">
+                        <div class="card-body">
+                            <div class="stars mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text mb-4">
+                                "The monitoring and analytics features give us unprecedented visibility 
+                                into our AI systems. It's like having an AI expert on our team 24/7."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-placeholder me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Emily Zhang</div>
+                                    <small class="text-muted">CTO, DataDriven Inc</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Request Section -->
+    <section id="demo" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="demo-section text-center">
+                        <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+                        <p class="lead mb-5">
+                            Schedule a personalized demo and see how AI Playground can accelerate 
+                            your AI development workflow.
+                        </p>
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card bg-dark border-primary">
+                                    <div class="card-body p-4">
+                                        <form method="POST" action="{{ url_for('demo_request') }}">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="demo-name" class="form-label">Full Name *</label>
+                                                    <input type="text" class="form-control" id="demo-name" name="name" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="demo-email" class="form-label">Email Address *</label>
+                                                    <input type="email" class="form-control" id="demo-email" name="email" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="demo-company" class="form-label">Company *</label>
+                                                    <input type="text" class="form-control" id="demo-company" name="company" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="demo-use-case" class="form-label">Primary Use Case</label>
+                                                    <textarea class="form-control" id="demo-use-case" name="use_case" rows="3" 
+                                                              placeholder="Tell us about your AI testing needs..."></textarea>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                                        <i class="fas fa-calendar me-2"></i>Schedule Demo
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-dark bg-opacity-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Get in Touch</h2>
+                    <p class="lead">
+                        Have questions about our platform? Our team is here to help you succeed with AI.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="contact-info text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <h6 class="fw-bold">Email</h6>
+                                <p class="text-muted">hello@aiplayground.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="contact-info text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <h6 class="fw-bold">Phone</h6>
+                                <p class="text-muted">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="contact-info text-center">
+                                <div class="contact-icon mb-3">
+                                    <i class="fas fa-chat text-primary"></i>
+                                </div>
+                                <h6 class="fw-bold">Live Chat</h6>
+                                <p class="text-muted">Available 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="card bg-dark border-primary">
+                                <div class="card-body p-4">
+                                    <form method="POST" action="{{ url_for('contact') }}">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="contact-name" class="form-label">Name *</label>
+                                                <input type="text" class="form-control" id="contact-name" name="name" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="contact-email" class="form-label">Email *</label>
+                                                <input type="email" class="form-control" id="contact-email" name="email" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="contact-company" class="form-label">Company</label>
+                                                <input type="text" class="form-control" id="contact-company" name="company">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="contact-message" class="form-label">Message *</label>
+                                                <textarea class="form-control" id="contact-message" name="message" rows="4" 
+                                                          placeholder="How can we help you?" required></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-brand mb-4">
+                        <h5 class="fw-bold">
+                            <i class="fas fa-brain me-2"></i>AI Playground
+                        </h5>
+                        <p class="text-muted">
+                            Empowering the next generation of AI development with professional-grade 
+                            testing and deployment tools.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Platform</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#playground" class="text-muted text-decoration-none">Playground</a></li>
+                        <li><a href="#services" class="text-muted text-decoration-none">AI TaaS</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">API Docs</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-muted text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Blog</a></li>
+                        <li><a href="#contact" class="text-muted text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Status</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Connect</h6>
+                    <div class="social-links">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2024 AI Playground. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">Built with ❤️ for AI developers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
